@@ -290,11 +290,23 @@
       color: rgba(255,255,255,.78);
     }
 
-    footer{
-      margin-top: 18px;
-      color: rgba(255,255,255,.55);
-      font-size: 12.5px;
-    }
+    .footer{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.footer-note{
+  color: rgba(255,255,255,.55);
+  font-size: 12.5px;
+}
+
+.chip-link{
+  text-decoration: none;
+  cursor: pointer;
+}
+
   </style>
 </head>
 <body>
@@ -406,7 +418,7 @@
 </div>
 <div>
 <h2>E-Bike Reverse Engineering</h2>
-<p class="desc">Reverse engineering of an e-bike throttle: analysis of the throttle pins revealed a square-wave signal, later emulated and, surprisingly, improved using an Arduino to replicate and control motor behavior.</p>
+<p class="desc">Reverse engineering of an e-bike throttle: analysis of the throttle pins revealed a square-wave signal, later emulated and, surprisingly, improved using an Arduino to replicate and control motor behaviour.</p>
 </div>
 <div class="meta">
 <span class="tag">Hardware</span>
@@ -481,9 +493,14 @@
 </article>
 
 </section>
-<footer>
-      Note: graphics not handmade.
-    </footer>
+<footer class="footer">
+  <span class="footer-note">Note: graphics not handmade.</span>
+
+  <a href="secondary-projects.html" class="chip chip-link">
+    Secondary projects →
+  </a>
+</footer>
+
 </div>
 </body>
 </html>
