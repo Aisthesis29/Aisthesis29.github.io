@@ -160,7 +160,23 @@ background-attachment: fixed;
         aspect-ratio: 3 / 1;
         margin-top: 12px;
       }
+      .top-square{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;     /* crops image */
+}
+
+.top-square img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* fills square nicely */
+  display: block;
+}
+
     }
+    
 
     footer {
       background: var(--footer-bg);
@@ -252,14 +268,16 @@ background-attachment: fixed;
     <!-- 6. Placeholder -->
     <div class="nav-row">
       <div class="nav-text">
-        <h3>Coming Soon</h3>
+        <h3>Hydroalert</h3>
         <p>
-          Placeholder for future projects, experiments, or research topics
-          currently under development.
+          An application capable of detecting dangerous amount of water level in rivers, and alerting nearby people in a specified radius
         </p>
       </div>
       <div class="arrow"></div>
-      <a href="#" class="top-square">—</a>
+      <a href="HomeDashboard.html" class="top-square">
+  <img src="statistiche.png" alt="Statistiche">
+</a>
+
     </div>
 
   </div>
