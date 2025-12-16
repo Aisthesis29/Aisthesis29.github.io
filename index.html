@@ -59,16 +59,19 @@ background-attachment: fixed;
 
     /* ---------- FULL-WIDTH NAV ---------- */
 
-    .nav-list {
-      width: 100vw;
-      display: grid;
-      gap: 14px;
-      margin: 24px 0;
-    }
+  .nav-list {
+  width: 100%;
+  max-width: 100vw;
+  display: grid;
+  gap: 14px;
+  margin: 24px 0;
+}
 
-    .nav-row {
-      width: 100vw;
-      height: 14vw;
+.nav-row {
+  width: 100%;
+  min-height: clamp(120px, 14vw, 220px);
+
+
 
       display: grid;
       grid-template-columns: minmax(240px, 1fr) clamp(70px, 14vw, 160px) auto;
