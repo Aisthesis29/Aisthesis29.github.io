@@ -1,107 +1,136 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <meta name="darkreader-lock">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Aisthesis</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ---------- OLD COLOR PALETTE ----------   --row-bg: rgba(29, 5, 65, 0.35);*/
+
+
+:root {
+  /* Original purple background */
+  --bg-top: #1d0541;
+  --bg-bottom: #4E1E97;
+
+  /* Row background (derived from bg-top) */
+
+  /* Button gradient (your original style) */
+  --btn-grad-start: #4E1E97;
+  --btn-grad-end: #024981;
+
+  /* Footer (slightly darker purple) */
+  --footer-bg: #37097c;
+
+  /* Text */
+  --text-main: #ffffff;
+}
+    /* ---------- NEW COLOR PALETTE ---------- --row-bg: rgba(21, 0, 61, 0.35);*/
+
+:root {
+  --bg-top: #010057;
+  --bg-bottom: #2b7ebd;
+
+  /* Use RGBA so alpha stays editable */
+  
+
+  --btn-grad-start: #1d2595;
+  --btn-grad-end: #417caa;
+
+  --footer-bg: #17097c;
+
+  --text-main: #ffffff;
+}
     body {
+  
+
       margin: 0;
       font-family: 'Outfit', sans-serif;
-      background: linear-gradient(to bottom, #1d0541, #4E1E97);
-      color: white;
+      background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+      color: var(--text-main);
+background-attachment: fixed;
     }
 
-    .section {
-      padding: 10px 20px;
-      text-align: center;
-    }
-
-    /* ---------- NAV LIST ---------- */
+    /* ---------- FULL-WIDTH NAV ---------- */
 
     .nav-list {
-      width: min(92vw, 1000px);
-      margin: 30px auto 20px;
+      width: 100vw;
       display: grid;
-      gap: 16px;
-      text-align: left;
+      gap: 14px;
+      margin: 24px 0;
     }
 
     .nav-row {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: center;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(29, 5, 65, 0.35);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-      backdrop-filter: blur(4px);
-    }
+      width: 100vw;
+      height: 14vw;
 
-    .nav-text {
-      padding-right: clamp(26px, 3.5vw, 44px);
+      display: grid;
+      grid-template-columns: minmax(240px, 1fr) clamp(70px, 14vw, 160px) auto;
+      align-items: center;
+      padding: 16px clamp(16px, 4vw, 48px);
+
+      background: var(--row-bg);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.18);
+      backdrop-filter: blur(4px);
+      box-sizing: border-box;
     }
 
     .nav-text h3 {
       margin: 0 0 6px 0;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
+      text-align: center;
     }
 
     .nav-text p {
+      text-align: center;
       margin: 0;
+      font-size: 1.05rem;
       opacity: 0.9;
-      font-size: 0.95rem;
       line-height: 1.25;
     }
 
-    /* ---------- ARROW ---------- */
+    /* ---------- PNG ARROW ---------- */
 
-    .nav-text::after {
-      content: "";
-      position: absolute;
-      right: calc(clamp(110px, 16vw, 160px) + 18px);
-      top: 50%;
-      transform: translateY(-50%);
-      width: clamp(26px, 4vw, 50px);
-      height: clamp(16px, 2.4vw, 28px);
+    .arrow {
+      height: 5vw;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
+      pointer-events: none;
       filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
-      background-image: url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'>\
-<defs>\
-<linearGradient id='g' x1='0' y1='0' x2='1' y2='0'>\
-<stop offset='0' stop-color='white' stop-opacity='0.15'/>\
-<stop offset='1' stop-color='white' stop-opacity='0.95'/>\
-</linearGradient>\
-</defs>\
-<path d='M5 20 H92' stroke='url(%23g)' stroke-width='5' stroke-linecap='round'/>\
-<path d='M92 8 L115 20 L92 32' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/>\
-</svg>");
+      background-image: url("arrow.png");
     }
 
     /* ---------- BUTTON ---------- */
 
     .top-square {
-      width: clamp(110px, 16vw, 160px);
-      aspect-ratio: 2 / 1;
-      background: linear-gradient(135deg, #4E1E97, #024981);
+      height: 10vw;
+      aspect-ratio: 1.5 / 1;
+      background: linear-gradient(
+        135deg,
+        var(--btn-grad-start),
+        var(--btn-grad-end)
+      );
       border-radius: 16px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       color: white;
       font-weight: 700;
       text-decoration: none;
+
       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      text-align: center;
+
+      justify-self: end;
       padding: 0 10px;
     }
 
@@ -118,39 +147,20 @@
         text-align: center;
       }
 
-      .nav-text::after {
+      .arrow {
         display: none;
       }
 
       .top-square {
-        margin: 12px auto 0;
-        width: min(70vw, 260px);
+        justify-self: center;
+        width: min(78vw, 280px);
         aspect-ratio: 3 / 1;
+        margin-top: 12px;
       }
     }
 
-    /* ---------- CONTENT ---------- */
-
-    .mode-card {
-      display: inline-block;
-      text-align: center;
-      width: 600px;
-      max-width: 100%;
-      padding: 20px;
-    }
-
-    .image-container {
-      border-radius: 50px;
-      overflow: hidden;
-    }
-
-    .image-container img {
-      width: 100%;
-      display: block;
-    }
-
     footer {
-      background: #37097c;
+      background: var(--footer-bg);
       padding: 20px;
       text-align: center;
     }
@@ -162,69 +172,93 @@
     }
   </style>
 </head>
-
 <body>
 
   <div class="nav-list">
 
+    <!-- 1. Robot stair walking -->
     <div class="nav-row">
       <div class="nav-text">
-        <h3>Map</h3>
-        <p>Visualizza la mappa live del server e osserva cosa succede in tempo reale.</p>
+        <h3>Stair-Climbing Robot</h3>
+        <p>
+          Design and experimentation of a robotic system capable of autonomous
+          stair walking, focusing on mechanical constraints, balance, torque
+          distribution, and real-world navigation challenges.
+        </p>
       </div>
-      <a href="map.html" class="top-square">Map</a>
+      <div class="arrow"></div>
+      <a href="#" class="top-square">Robotics</a>
     </div>
 
+    <!-- 2. ESP12 + MQTT server -->
     <div class="nav-row">
       <div class="nav-text">
-        <h3>Towny</h3>
-        <p>Costruisci città, gestisci permessi e scopri tutte le meccaniche Towny.</p>
+        <h3>ESP-12 MQTT Server</h3>
+        <p>
+          A lightweight ESP-12 based server architecture running effectively
+          “for free” by leveraging public MQTT brokers, enabling distributed
+          communication without centralized infrastructure costs.
+        </p>
       </div>
-      <a href="towny.html" class="top-square">Towny</a>
+      <div class="arrow"></div>
+      <a href="#" class="top-square">IoT</a>
     </div>
 
+    <!-- 3. Automatic controls / drones -->
     <div class="nav-row">
       <div class="nav-text">
-        <h3>Machines</h3>
-        <p>Macchinari custom avanzati per automazioni e farm evolute.</p>
+        <h3>Automatic Control Systems</h3>
+        <p>
+          Study and application of automatic control theory in dynamic systems,
+          including stabilization, feedback loops, and real-time control for
+          autonomous platforms such as flying drones.
+        </p>
       </div>
-      <a href="machines.html" class="top-square">Machines</a>
+      <div class="arrow"></div>
+      <a href="#" class="top-square">Control</a>
     </div>
 
+    <!-- 4. E-bike reverse engineering -->
     <div class="nav-row">
       <div class="nav-text">
-        <h3>Tutorial</h3>
-        <p>Guida rapida per iniziare e imparare tutte le meccaniche.</p>
+        <h3>E-Bike Reverse Engineering</h3>
+        <p>
+          Reverse engineering of an e-bike throttle interface: analysis of the
+          throttle pins revealed a square-wave signal, later emulated using an
+          Arduino to replicate and control motor behavior.
+        </p>
       </div>
-      <a href="tutorial.html" class="top-square">Tutorial</a>
+      <div class="arrow"></div>
+      <a href="#" class="top-square">Hardware</a>
     </div>
 
+    <!-- 5. CLIP latent space / thesis -->
     <div class="nav-row">
       <div class="nav-text">
-        <h3>Rules</h3>
-        <p>Regole del server e linee guida per una community corretta.</p>
+        <h3>CLIP Latent Space Analysis</h3>
+        <p>
+          Exploration of CLIP latent spaces for understanding, verifying, and
+          interpreting semantic representations in multimodal AI models,
+          forming the core research topic of my thesis.
+        </p>
       </div>
-      <a href="rules.html" class="top-square">Rules</a>
+      <div class="arrow"></div>
+      <a href="#" class="top-square">AI</a>
     </div>
 
+    <!-- 6. Placeholder -->
     <div class="nav-row">
       <div class="nav-text">
-        <h3>Shop</h3>
-        <p>Economia, scambi e vantaggi disponibili sul server.</p>
+        <h3>Coming Soon</h3>
+        <p>
+          Placeholder for future projects, experiments, or research topics
+          currently under development.
+        </p>
       </div>
-      <a href="shop.html" class="top-square">Shop</a>
+      <div class="arrow"></div>
+      <a href="#" class="top-square">—</a>
     </div>
 
-  </div>
-
-  <div class="section">
-    <div class="mode-card">
-      <div class="image-container">
-        <img src="tutorialimage.png" alt="Tutorial">
-      </div>
-      <h3>Tutorial Macchinari</h3>
-      <p>Esplora la zona tutorial per imparare ogni cosa sui nostri macchinari custom.</p>
-    </div>
   </div>
 
   <footer>
