@@ -20,32 +20,36 @@
       text-align: center;
     }
 
-    /* ---------- RIGHT-SIDE NAV LIST (TEXT + BUTTON) ---------- */
+    /* ---------- NAV LIST ---------- */
 
     .nav-list {
       width: min(92vw, 1000px);
-      margin: 24px auto 18px;
+      margin: 30px auto 20px;
       display: grid;
-      gap: 14px;
+      gap: 16px;
       text-align: left;
     }
 
     .nav-row {
+      position: relative;
       display: grid;
-      grid-template-columns: 1fr auto; /* text | button on the right */
+      grid-template-columns: 1fr auto;
       gap: 16px;
       align-items: center;
-      padding: 12px 14px;
+      padding: 14px 16px;
       border-radius: 18px;
       background: rgba(29, 5, 65, 0.35);
       box-shadow: 0 6px 14px rgba(0,0,0,0.18);
       backdrop-filter: blur(4px);
     }
 
+    .nav-text {
+      padding-right: clamp(26px, 3.5vw, 44px);
+    }
+
     .nav-text h3 {
       margin: 0 0 6px 0;
       font-size: 1.05rem;
-      line-height: 1.15;
     }
 
     .nav-text p {
@@ -55,9 +59,36 @@
       line-height: 1.25;
     }
 
-    /* the right-side "square" buttons */
+    /* ---------- ARROW ---------- */
+
+    .nav-text::after {
+      content: "";
+      position: absolute;
+      right: calc(clamp(110px, 16vw, 160px) + 18px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(26px, 4vw, 50px);
+      height: clamp(16px, 2.4vw, 28px);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
+      background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'>\
+<defs>\
+<linearGradient id='g' x1='0' y1='0' x2='1' y2='0'>\
+<stop offset='0' stop-color='white' stop-opacity='0.15'/>\
+<stop offset='1' stop-color='white' stop-opacity='0.95'/>\
+</linearGradient>\
+</defs>\
+<path d='M5 20 H92' stroke='url(%23g)' stroke-width='5' stroke-linecap='round'/>\
+<path d='M92 8 L115 20 L92 32' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/>\
+</svg>");
+    }
+
+    /* ---------- BUTTON ---------- */
+
     .top-square {
-      /* keeps it responsive and consistent */
       width: clamp(110px, 16vw, 160px);
       aspect-ratio: 2 / 1;
       background: linear-gradient(135deg, #4E1E97, #024981);
@@ -70,9 +101,8 @@
       text-decoration: none;
       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      user-select: none;
       text-align: center;
-      padding: 0 10px; /* prevents text touching edges */
+      padding: 0 10px;
     }
 
     .top-square:hover {
@@ -80,38 +110,38 @@
       box-shadow: 0 10px 18px rgba(0,0,0,0.35);
     }
 
-    /* Mobile: stack text above button */
+    /* ---------- MOBILE ---------- */
+
     @media (max-width: 700px) {
       .nav-row {
         grid-template-columns: 1fr;
         text-align: center;
       }
+
+      .nav-text::after {
+        display: none;
+      }
+
       .top-square {
-        margin: 10px auto 0;
+        margin: 12px auto 0;
         width: min(70vw, 260px);
         aspect-ratio: 3 / 1;
       }
-      .nav-text {
-        text-align: center;
-      }
     }
 
-    /* ---------- MODE CARDS ---------- */
+    /* ---------- CONTENT ---------- */
 
     .mode-card {
       display: inline-block;
       text-align: center;
-      background: transparent;
-      border-radius: 20px;
       width: 600px;
-      padding: 20px;
       max-width: 100%;
+      padding: 20px;
     }
 
     .image-container {
-      position: relative;
-      overflow: hidden;
       border-radius: 50px;
+      overflow: hidden;
     }
 
     .image-container img {
@@ -127,22 +157,20 @@
 
     footer a {
       color: white;
-      margin: 0 10px;
-      text-decoration: none;
       font-weight: bold;
+      text-decoration: none;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ---------- RIGHT-SIDE BUTTONS WITH EXPLANATION TEXT ---------- -->
   <div class="nav-list">
 
     <div class="nav-row">
       <div class="nav-text">
         <h3>Map</h3>
-        <p>Apri la mappa live del server (Dynmap / Bluemap / ecc.) e guarda cosa sta succedendo in tempo reale.</p>
+        <p>Visualizza la mappa live del server e osserva cosa succede in tempo reale.</p>
       </div>
       <a href="map.html" class="top-square">Map</a>
     </div>
@@ -150,7 +178,7 @@
     <div class="nav-row">
       <div class="nav-text">
         <h3>Towny</h3>
-        <p>Info su come creare una città, claim, permessi, ruoli e comandi principali.</p>
+        <p>Costruisci città, gestisci permessi e scopri tutte le meccaniche Towny.</p>
       </div>
       <a href="towny.html" class="top-square">Towny</a>
     </div>
@@ -158,7 +186,7 @@
     <div class="nav-row">
       <div class="nav-text">
         <h3>Machines</h3>
-        <p>Catalogo macchinari custom, crafting, funzioni, esempi d’uso e automazioni.</p>
+        <p>Macchinari custom avanzati per automazioni e farm evolute.</p>
       </div>
       <a href="machines.html" class="top-square">Machines</a>
     </div>
@@ -166,7 +194,7 @@
     <div class="nav-row">
       <div class="nav-text">
         <h3>Tutorial</h3>
-        <p>Guida rapida per iniziare: primi passi, comandi base, consigli e zona tutorial.</p>
+        <p>Guida rapida per iniziare e imparare tutte le meccaniche.</p>
       </div>
       <a href="tutorial.html" class="top-square">Tutorial</a>
     </div>
@@ -174,7 +202,7 @@
     <div class="nav-row">
       <div class="nav-text">
         <h3>Rules</h3>
-        <p>Regole del server, cosa è permesso, cosa no, e cosa succede in caso di violazioni.</p>
+        <p>Regole del server e linee guida per una community corretta.</p>
       </div>
       <a href="rules.html" class="top-square">Rules</a>
     </div>
@@ -182,24 +210,20 @@
     <div class="nav-row">
       <div class="nav-text">
         <h3>Shop</h3>
-        <p>Info sullo shop / economia: valuta, prezzi, scambi, mercati e vantaggi.</p>
+        <p>Economia, scambi e vantaggi disponibili sul server.</p>
       </div>
       <a href="shop.html" class="top-square">Shop</a>
     </div>
 
   </div>
 
-  <!-- ---------- OPTIONAL CONTENT BELOW ---------- -->
   <div class="section">
     <div class="mode-card">
       <div class="image-container">
         <img src="tutorialimage.png" alt="Tutorial">
       </div>
       <h3>Tutorial Macchinari</h3>
-      <p>
-        Esplora la zona tutorial per imparare ogni cosa
-        sui nostri macchinari custom!
-      </p>
+      <p>Esplora la zona tutorial per imparare ogni cosa sui nostri macchinari custom.</p>
     </div>
   </div>
 
