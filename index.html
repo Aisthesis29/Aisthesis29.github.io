@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AversaMC</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(to bottom, #1d0541, #4E1E97);
+      color: white;
+    }
+
+    .section {
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    /* ---------- TOP MINI SQUARES ---------- */
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      max-width: 600px;
+      margin: 20px auto 30px;
+    }
+
+    @media (max-width: 700px) {
+      .top-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .top-square {
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, #4E1E97, #024981);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .top-square:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.35);
+    }
+
+    /* ---------- BUTTON ---------- */
+
+    .button {
+      display: inline-block;
+      background: linear-gradient(to right, #4E1E97, #024981);
+      padding: 12px 24px;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- MODE CARDS ---------- */
+
+    .mode-card {
+      display: inline-block;
+      text-align: center;
+      background: transparent;
+      border-radius: 20px;
+      width: 600px;
+      padding: 20px;
+      max-width: 100%;
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 50px;
+    }
+
+    .image-container img {
+      width: 100%;
+      display: block;
+    }
+
+    .image-container2 {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-container2 img {
+      width: 100%;
+      display: block;
+    }
+
+    footer {
+      background: #37097c;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ---------- TOP NAV GRID ---------- -->
+  <div class="section">
+    <div class="top-grid">
+      <a href="map.html" class="top-square">Map</a>
+      <a href="towny.html" class="top-square">Towny</a>
+      <a href="machines.html" class="top-square">Machines</a>
+      <a href="tutorial.html" class="top-square">Tutorial</a>
+      <a href="rules.html" class="top-square">Rules</a>
+      <a href="shop.html" class="top-square">Shop</a>
+    </div>
+  </div>
+
+  <!-- ---------- MAP BUTTON ---------- -->
+  <div class="section">
+    <h3>Guarda la mappa in tempo reale su</h3>
+    <a href="http://map.aversa.it:19161" class="button">
+      map.aversa.it:19161
+    </a>
+  </div>
+
+  <!-- ---------- WORLD MAP ---------- -->
+  <div class="section">
+    <div class="mode-card">
+      <div class="image-container2">
+        <img src="mondo.png" alt="Mappa del mondo">
+      </div>
+      <h3><strong>Mappa del mondo in scala</strong></h3>
+      <p>
+        <strong>
+          Gioca il nostro towny in cui costruisci la tua città e naviga
+          la mappa 1:1000 del mondo reale sul nostro server
+        </strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- ---------- MACHINES ---------- -->
+  <div class="section">
+    <div class="mode-card">
+      <div class="image-container">
+        <img src="machineimageGPT.png" alt="Macchinari custom">
+      </div>
+      <h3>Macchinari custom</h3>
+      <p>
+        Scopri tutti i nostri macchinari completi di funzionalità e texture!
+        Automatizza e crea farm mai viste.
+      </p>
+    </div>
+  </div>
+
+  <!-- ---------- TUTORIAL ---------- -->
+  <div class="section">
+    <div class="mode-card">
+      <div class="image-container">
+        <img src="tutorialimage.png" alt="Tutorial">
+      </div>
+      <h3>Tutorial Macchinari</h3>
+      <p>
+        Esplora la zona tutorial per imparare ogni cosa
+        sui nostri macchinari custom!
+      </p>
+    </div>
+  </div>
+
+  <!-- ---------- FOOTER ---------- -->
+  <footer>
+    <a href="https://t.me/aversamc">t.me/aversamc</a>
+    <a href="https://www.tiktok.com/@aversamc">tiktok.com/@aversamc</a>
+  </footer>
+
+</body>
+</html>
