@@ -11,7 +11,7 @@
     width="180"
     height="180"
     filter="url(#noise)"
-    opacity="0.1"/> <!-- not working on github alone, somehow-->
+    opacity="0.0"/> <!-- not working on github alone, somehow. reset to 0.0-->
 
 </svg>
 
