@@ -18,8 +18,15 @@ zoom:1.2;
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  background: var(--bg);
   color: var(--text);
+  background:
+    linear-gradient(190deg,
+      rgba(13, 64, 160, 0.12),
+      rgba(80, 76, 181, 0.08),
+      rgba(192, 44, 44, 0.06)
+    ),
+    var(--bg);
+    background-attachment: fixed;
 }
 
 .wrapper{
@@ -116,15 +123,17 @@ p{
       <div class="item">
         <div class="item-text">
           <strong>LoRa Network Nodes</strong>
-          <span>Battery-powered communication network capable of talking to km of distance to other people</span>
+          <span>Battery-powered communication network capable of connecting people that are several kilometers distant</span>
         </div>
         <a href="#">Open</a>
       </div>
 
       <div class="item">
         <div class="item-text">
-          <strong>OLED Battery Charger</strong>
-          <span>A battery charger i made to supplement energy to any type of li-ion battery, no matter the connector </span>
+          <strong>Battery Charger(s)</strong>
+          <span>A battery charger I made to supplement energy to any type of li-ion battery, no matter the connector.<br>
+                <b>furthermore</b>, a battery monitor for an ebike that allows to check and stop the recharge at a prefixed voltage (eg. 38.5V,39V) 
+                to preserve battery life</span>
         </div>
         <a href="#">Open</a>
       </div>
