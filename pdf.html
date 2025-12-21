@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>tesi.pdf</title>
+
+  <style>
+    :root{
+      --bg:#070A12;
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.60);
+      --panel:rgba(255,255,255,.04);
+      --panelLine:rgba(255,255,255,.14);
+      --shadow:rgba(0,0,0,.55);
+    }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      background:
+        linear-gradient(190deg,
+          rgba(13, 64, 160, 0.12),
+          rgba(80, 76, 181, 0.08),
+          rgba(192, 44, 44, 0.06)
+        ),
+        var(--bg);
+      background-attachment: fixed;
+    }
+
+    /* Centered column like your other pages */
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 14px 40px;
+    }
+
+    /* Where pages will appear */
+    #viewer{
+      display: grid;
+      gap: 18px;
+    }
+
+    /* Each page "card" */
+    .page{
+      border: 1px solid var(--panelLine);
+      background: var(--panel);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 25px 70px var(--shadow);
+    }
+
+    /* Canvas should fill the card */
+    .page canvas{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    /* Lightweight status */
+    #status{
+      color: var(--muted);
+      font-size: 14px;
+      margin: 8px 0 14px;
+      user-select: none;
+    }
+
+    /* If you want absolutely "nothing", delete the #status element in HTML */
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div id="status">Loading…</div>
+    <div id="viewer"></div>
+  </div>
+
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.js"></script>
+  <script>
+    // Point to your PDF file
+    const PDF_URL = "tesi.pdf";
+
+    // Set worker (required for performance)
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.js";
+
+    const statusEl = document.getElementById("status");
+    const viewerEl = document.getElementById("viewer");
+
+    // Render settings
+    const BASE_SCALE = 1.35;     // increase for sharper text (but heavier)
+    const MAX_PIXELS = 4_000_000; // safety limit to avoid huge canvases on big pages
+
+    function setStatus(msg){
+      if (!statusEl) return;
+      statusEl.textContent = msg;
+    }
+
+    function createPageNode(){
+      const page = document.createElement("div");
+      page.className = "page";
+      return page;
+    }
+
+    async function renderPage(pdf, pageNum){
+      const page = await pdf.getPage(pageNum);
+
+      // Render at a scale that roughly matches your container width,
+      // while keeping quality decent.
+      const unscaled = page.getViewport({ scale: 1 });
+      const containerWidth = viewerEl.clientWidth || 1000;
+
+      // Fit-to-width scale, then multiply by BASE_SCALE for crispness
+      const fitScale = (containerWidth / unscaled.width) * BASE_SCALE;
+      let viewport = page.getViewport({ scale: fitScale });
+
+      // Prevent pathological huge canvases
+      const pixels = viewport.width * viewport.height;
+      if (pixels > MAX_PIXELS) {
+        const shrink = Math.sqrt(MAX_PIXELS / pixels);
+        viewport = page.getViewport({ scale: fitScale * shrink });
+      }
+
+      const pageNode = createPageNode();
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d", { alpha: false });
+
+      // High-DPI support
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width  = Math.floor(viewport.width * dpr);
+      canvas.height = Math.floor(viewport.height * dpr);
+      canvas.style.width  = viewport.width + "px";
+      canvas.style.height = viewport.height + "px";
+
+      pageNode.appendChild(canvas);
+      viewerEl.appendChild(pageNode);
+
+      const renderViewport = page.getViewport({ scale: viewport.scale * dpr });
+
+      await page.render({
+        canvasContext: ctx,
+        viewport: renderViewport,
+        // Improves text rendering in some cases
+        renderInteractiveForms: false
+      }).promise;
+    }
+
+    async function main(){
+      try{
+        setStatus("Loading tesi.pdf…");
+        const loadingTask = pdfjsLib.getDocument({
+          url: PDF_URL,
+          withCredentials: false
+        });
+
+        const pdf = await loadingTask.promise;
+
+        setStatus(`Rendering ${pdf.numPages} pages…`);
+
+        // Render sequentially for stability (less RAM spikes).
+        for (let i = 1; i <= pdf.numPages; i++){
+          setStatus(`Rendering page ${i} / ${pdf.numPages}…`);
+          await renderPage(pdf, i);
+        }
+
+        // Hide status once done (for "only PDF" look)
+        if (statusEl) statusEl.style.display = "none";
+      } catch (err){
+        console.error(err);
+        setStatus("Failed to load the PDF. Make sure tesi.pdf is in the same folder as this HTML file.");
+      }
+    }
+
+    // Re-render on resize (simple approach: reload page)
+    // Optional: comment this out if you don't want it.
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => location.reload(), 250);
+    });
+
+    main();
+  </script>
+</body>
+</html>
